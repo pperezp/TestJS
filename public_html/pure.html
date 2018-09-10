@@ -14,30 +14,41 @@
         </style>
     </head>
     <body onload="gen()">
-        <div class="container">
-            <input type="button" value="Random Color" onclick="randomColor()">
-            <input id="tam" placeholder="Tamaño" type="number" min="0" onclick="changeFontSize(this.value)">
-            <h1 class="sombra">Test Javascript</h1>
-            <input placeholder="Primer número: " type="number" onkeyup="calc()" id="num1">
+        <input type="button" value="Random Color" onclick="randomColor()">
+        <input id="tam" placeholder="Tamaño" type="number" min="0" onclick="changeFontSize(this.value)">
+        <h1 class="sombra">Test Javascript</h1>
+        
+        
+        
+        <!-- Calculadora Javascript -->
+        <input placeholder="Primer número: " type="number" onkeyup="calc()" id="num1">
 
-            <select onchange="calc()" id="operador">
-                <option>+</option>
-                <option>-</option>
-                <option>/</option>
-                <option>*</option>
-            </select>
+        <select onchange="calc()" id="operador">
+            <option>+</option>
+            <option>-</option>
+            <option>/</option>
+            <option>*</option>
+        </select>
 
-            <input placeholder="Segundo número: " type="number" onkeyup="calc()" id="num2">
-            =
-            <input placeholder="Resultado" type="text" id="res" readonly>
-            <div id="notes"></div>
-            <div id="rgb"></div>
-            <div id="rgbProgress">
-                <progress id="rp" max="255"></progress>
-                <progress id="gp" max="255"></progress>
-                <progress id="bp" max="255"></progress>
-            </div>
+        <input placeholder="Segundo número: " type="number" onkeyup="calc()" id="num2">
+        =
+        <input placeholder="Resultado" type="text" id="res" readonly>
+        <div id="notes"></div>
+        <!-- Calculadora Javascript -->
+        
+        
+        
+        <!-- Colores -->
+        <div id="rgb"></div>
+        <div id="rgbProgress">
+            <progress id="rp" max="255"></progress><span id="r"></span><br>
+            <progress id="gp" max="255"></progress><span id="g"></span><br>
+            <progress id="bp" max="255"></progress><span id="b"></span><br>
         </div>
+        <!-- Colores -->
+        
+        
+        
         <script>
             (function(){
                 // esta función se llama apenas se cargue la página
@@ -116,73 +127,78 @@
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
-
+ 
+            var pause = 30;
+            var step = 1;
+            var r = 255;
+            var g = 0;
+            var b = 0;
+            
             async function gen() {
                 /*while (true) {
                  randomColor();
                  await sleep(1000);
                  }*/
-
-                var pause = 30;
-                
                 while(true){
-                    var r = 255;
-                    var g = 0;
-                    var b = 0;
-                    
-                    for (var g = 0; g <= 255; g++) {
-                        printRgb(r,g,b);
+                    // sube el verde
+                    for (g = 0; g <= 255; g = g + step) {
+                        printRgb();
                         document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
                         await sleep(pause);
                     }
-                    g--;
+                    g = g - step;
 
-                    for (var r = 255; r >= 0; r--) {
-                        printRgb(r,g,b);
+                    // baja el rojo
+                    for (r = 255; r >= 0; r = r - step) {
+                        printRgb();
                         document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
                         await sleep(pause);
                     }
-                    r++;
+                    r = r + step;
 
-                    for (var b = 0; b <= 255; b++) {
-                        printRgb(r,g,b);
-                        document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
-                        await sleep(pause);
-                    }
-
-                    b--;
-
-                    for (var g = 255; g >= 0; g--) {
-                        printRgb(r,g,b);
+                    // sube el azul
+                    for (b = 0; b <= 255; b = b + step) {
+                        printRgb();
                         document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
                         await sleep(pause);
                     }
 
-                    g++;
+                    b = b - step;
 
-
-                    for (var r = 0; r <= 255; r++) {
-                        printRgb(r,g,b);
-                        document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
-                        await sleep(pause);
-                    }
-                    r--;
-
-                    for (var b = 255; b >= 0; b--) {
-                        printRgb(r,g,b);
+                    // baja el verde
+                    for (g = 255; g >= 0; g = g - step) {
+                        printRgb();
                         document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
                         await sleep(pause);
                     }
 
-                    b++;
+                    g = g + step;
+
+
+                    // sube el rojo
+                    for (r = 0; r <= 255; r = r + step) {
+                        printRgb();
+                        document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+                        await sleep(pause);
+                    }
+                    r = r - step;
+
+                    // baja el azul
+                    for (b = 255; b >= 0; b = b - step) {
+                        printRgb();
+                        document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+                        await sleep(pause);
+                    }
+
+                    b = b + step;
                 }
                 
             }
             
-            function printRgb(r, g, b){
-                document.getElementById("rgb").innerHTML = "Rojo: "+r;
-                document.getElementById("rgb").innerHTML += "<br>Verde: "+g;
-                document.getElementById("rgb").innerHTML += "<br>Azul: "+b;
+            function printRgb(){
+                document.getElementById("r").innerHTML = "Rojo: "+r;
+                document.getElementById("g").innerHTML = "Verde: "+g;
+                document.getElementById("b").innerHTML = "Azul: "+b;
                 
                 document.getElementById("rp").value = r;
                 document.getElementById("gp").value = g;
