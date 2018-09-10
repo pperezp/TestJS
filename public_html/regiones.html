@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <select id="cboRegiones" onclick="setComunas(this.value)"></select>
+        <select id="cboComunas" onclick="cboComunasClick(this.value)"></select>
+        <div id="resultado"></div>
+        <script>
+
+            (function () {
+                var regiones = getRegiones();
+                var cboRegiones = document.getElementById("cboRegiones");
+
+                for (var i = 0; i < regiones.length; i++) {
+                    cboRegiones.innerHTML += "<option value='" + i + "'>" + regiones[i] + "</option>";
+                }
+            })();
+            
+            function cboComunasClick(idComuna){
+                document.getElementById("resultado").innerHTML = "";
+                document.getElementById("resultado").innerHTML = "Su comuna es: ID "+idComuna;
+            }
+            
+            function setComunas(idRegion){
+                var comunas = getComunas(idRegion);
+                var cboComunas = document.getElementById("cboComunas");
+                cboComunas.innerHTML = "";
+                
+                for (var i = 0; i < comunas.length; i++) {
+                    var com = comunas[i];
+                    cboComunas.innerHTML += "<option value='" + com.id + "'>" + com.nombre + "</option>";
+                }
+            }
+
+            function getRegiones() {
+                var reg = [
+                    "I Región",
+                    "II Región",
+                    "III Región"
+                ];
+
+                return reg;
+            }
+
+            function getComunas(idRegion) {
+                var comunas;
+
+                switch (parseInt(idRegion)) {
+                    case 0:
+                        comunas = [
+                            {
+                                id: "1",
+                                nombre: "Comuna I"
+                            },
+                            {
+                                id: "2",
+                                nombre: "Comuna II"
+                            },
+                            {
+                                id: "3",
+                                nombre: "Comuna III"
+                            }
+                        ];
+                        break;
+                    case 1:
+                        comunas = [
+                            {
+                                id: "4",
+                                nombre: "Comuna IV"
+                            },
+                            {
+                                id: "5",
+                                nombre: "Comuna V"
+                            },
+                            {
+                                id: "6",
+                                nombre: "Comuna VI"
+                            }
+                        ];
+                        break;
+                    default:
+                        comunas = [
+                            {
+                                id: "7",
+                                nombre: "Comuna VII"
+                            },
+                            {
+                                id: "8",
+                                nombre: "Comuna VIII"
+                            },
+                            {
+                                id: "9",
+                                nombre: "Comuna IX"
+                            }
+                        ];
+                }
+
+                return comunas;
+            }
+        </script>
+    </body>
+</html>
