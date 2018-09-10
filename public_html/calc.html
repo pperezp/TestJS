@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- Calculadora Javascript -->
+        <input placeholder="Primer número: " type="number" onkeyup="calc()" id="num1">
+
+        <select onchange="calc()" id="operador">
+            <option>+</option>
+            <option>-</option>
+            <option>/</option>
+            <option>*</option>
+        </select>
+
+        <input placeholder="Segundo número: " type="number" onkeyup="calc()" id="num2">
+        =
+        <input placeholder="Resultado" type="text" id="res" readonly>
+        <div id="notes"></div>
+        <!-- Calculadora Javascript -->
+        
+        <script>
+            function calc() {
+                var num1 = document.getElementById("num1").value;
+                var num2 = document.getElementById("num2").value;
+                var operador = document.getElementById("operador").value;
+                var res = document.getElementById("res");
+                var notes = document.getElementById("notes");
+
+                if (num1 === "")
+                    num1 = 0;
+
+                if (num2 === "")
+                    num2 = 0;
+
+                num1 = parseFloat(num1);
+                num2 = parseFloat(num2);
+
+                var operacion;
+                switch (operador) {
+                    case "+":
+                        res.value = num1 + num2;
+                        operacion = "suma";
+                        break;
+                    case "-":
+                        res.value = num1 - num2;
+                        operacion = "resta";
+                        break;
+                    case "/":
+                        res.value = num1 / num2;
+                        operacion = "división";
+                        break;
+                    default:
+                        res.value = num1 * num2;
+                        operacion = "multiplicación";
+                }
+
+                notes.innerHTML = "Primer número: " + num1;
+                notes.innerHTML += "<br>";
+                notes.innerHTML += "Segundo número:  " + num2;
+                notes.innerHTML += "<br>";
+                notes.innerHTML += "operación: " + operacion;
+
+                if (res.value >= 0) {
+                    res.style.backgroundColor = "green";
+                    res.style.color = "#FFFFFF";
+                } else {
+                    res.style.backgroundColor = "red";
+                    res.style.color = "#FFFFFF";
+                }
+            }
+        </script>
+    </body>
+</html>

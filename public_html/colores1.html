@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input id="btnRandom" type="button" value="Random Color" onclick="setColor()">
+        <input id="tam" placeholder="Tamaño" type="number" min="32" onclick="changeFontSize(this.value)">
+
+        <h1 id="titulo">Colores Random</h1>
+        
+        <script>
+            function changeFontSize(size) {
+                document.getElementById("titulo").style.fontSize = size + "px";
+            }
+
+            var r,g,b;
+            
+            function randomColor(){
+                r = Math.floor((Math.random() * 255) + 0);
+                g = Math.floor((Math.random() * 255) + 0);
+                b = Math.floor((Math.random() * 255) + 0);
+            }
+
+            function setColor() {
+                randomColor();
+                document.body.style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+                randomColor();
+                document.getElementById("titulo").style.color = "rgb(" + r + "," + g + "," + b + ")";
+                randomColor();
+                document.getElementById("btnRandom").style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+                randomColor();
+                document.getElementById("btnRandom").style.color = "rgb(" + r + "," + g + "," + b + ")";
+                randomColor();
+                document.getElementById("tam").style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
+                randomColor();
+                document.getElementById("tam").style.color = "rgb(" + r + "," + g + "," + b + ")";
+            }
+        </script>
+    </body>
+</html>
