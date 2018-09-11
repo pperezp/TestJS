@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="resultado"></div>
+        <script>
+            
+            var nombre = prompt("Como te llamas?");
+            if(nombre === null || nombre.trim() === ""){
+                nombre = "Estimado usuario";
+            }
+            
+            var num1 = prompt(nombre+", Ingrese el primer número:");
+            if(num1 === null || num1.trim() === ""){
+                num1 = 0;
+            }
+            
+            var operador = prompt("Operador: [+,-,*,/]: ");
+            if(operador === null || operador.trim() === ""){
+                operador = "+";
+            }
+            
+            var num2 = prompt("Ingrese el segundo número:");
+            if(num2 === null || num2.trim() === ""){
+                num2 = 0;
+            }
+            var resultado;
+            
+            switch(operador){
+                case "+":
+                    resultado = parseFloat(num1) + parseFloat(num2);
+                    break;
+                case "-":
+                    resultado = parseFloat(num1) - parseFloat(num2);
+                    break;
+                case "/":
+                    resultado = parseFloat(num1) / parseFloat(num2);
+                    break;
+                default:
+                    resultado = parseFloat(num1) * parseFloat(num2);
+                    
+            }
+            
+            var res = document.getElementById("resultado");
+            
+            res.style.fontSize = "30px";
+            
+            res.innerHTML = nombre+", ";
+            res.innerHTML += "El resultado de ";
+            res.innerHTML += num1;
+            res.innerHTML += " "+operador+" ";
+            res.innerHTML += num2;
+            res.innerHTML += " = "+resultado;
+        </script>
+    </body>
+</html>
