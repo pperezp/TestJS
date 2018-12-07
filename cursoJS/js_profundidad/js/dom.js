@@ -25,6 +25,7 @@ btns.forEach((elemento) => {
     elemento.style.background = "red";
     elemento.style.padding = "20px";
     elemento.style.color = "white";
+    elemento.style.margin = "5px";
 
     var p = document.createElement("p");
     var texto = document.createTextNode("Text Node");
