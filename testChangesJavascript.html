@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <form action="">
+            <input type="text" name="name" id="name" placeholder="Name:"><br>
+
+            <input type="radio" name="sex" id="male">Masculino<br>
+            <input type="radio" name="sex" id="female">Femenino<br>
+
+            <select name="country" id="country">
+                <option value="1">Argentina</option>
+                <option value="2">Bolivia</option>
+                <option value="3">Chile</option>
+                <option value="4">Venezuela</option>
+            </select><br>
+
+            <input id="save" type="button" value="Guardar">
+        </form>
+        
+        <script>
+            "use strict";
+
+            var data = {};
+            const CHANGE = true;
+            const NOT_CHANGE = false;
+
+            window.addEventListener("load", function(){
+                initData();
+                loadDataInForm();
+                initListeners();
+            });
+
+            function initListeners(){
+                document.querySelector("#name").addEventListener("keyup", function(){
+                    data.name[0] = document.querySelector("#name").value;
+                    data.name[1] = CHANGE;
+                });
+
+                document.querySelector("#male").addEventListener("click", function(){
+                    data.sex[0] = "male";
+                    data.sex[1] = CHANGE;
+                });
+
+                document.querySelector("#female").addEventListener("click", function(){
+                    data.sex[0] = "female";
+                    data.sex[1] = CHANGE;
+                });
+
+                document.querySelector("#country").addEventListener("change", function(){
+                    data.country[0] = parseInt(document.querySelector("#country").value);
+                    data.country[1] = CHANGE;
+                });
+
+                document.querySelector("#save").addEventListener("click", function(){
+                    showData();
+                });
+            }
+
+            function initData(){
+                data.name       = ["Patricio Pérez Pinto", NOT_CHANGE];
+                data.sex        = ["male", NOT_CHANGE];
+                data.country    = [3, NOT_CHANGE];
+
+                showData();
+            }
+
+            function loadDataInForm(){
+                document.querySelector("#name").value = data.name[0];
+                
+                if(data.sex[0] == "male"){
+                    document.querySelector("#male").checked = true;
+                }else{
+                    document.querySelector("#female").checked = true;
+                }
+
+                document.querySelector("#country").value = data.country[0];
+            }
+
+            function showData(){
+                console.table(data);
+            }
+        </script>
+    </body>
+</html>
